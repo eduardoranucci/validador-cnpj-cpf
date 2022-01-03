@@ -19,9 +19,9 @@ def iniciar(option):
 def valida_cpf(cpf):
     cpf = cpf.replace('.', '').replace('-', '')
 
-    if len(cpf) == 10:
+    if len(cpf) == 11:
         validar = True
-        digitos_verificadores = cpf[8:]
+        digitos_verificadores = cpf[9:]
     else:
         validar = False
 
@@ -67,10 +67,24 @@ def valida_cpf(cpf):
     dig_11 = dig_1_ao_10_somados % 11
 
     if dig_11 > 9:
-        dig_10 = 0
+        dig_11 = 0
 
     cpf_validado = cpf + str(dig_11)
-    print(cpf_validado)
+
+    cpf = (cpf_validado[:3] + '.' + cpf_validado[3:6] + '.' +
+           cpf_validado[6:9] + '-' + cpf_validado[9:])
+
+    if validar:
+        if digitos_verificadores == cpf_validado[9:]:
+            print()
+            print('Os dígitos verificadores estão corretos.', end='\n\n')
+        else:
+            print()
+            print('Os dígitos verificadores estão incorretos.', end='\n\n')
+            print(f'CPF: {cpf}', end='\n\n')
+    else:
+        print()
+        print(f'CPF: {cpf}', end='\n\n')
 
 
 def valida_cnpj(cnpj):
