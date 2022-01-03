@@ -10,11 +10,67 @@ args = parser.parse_args()
 
 def iniciar(option):
     if option.cpf is not None:
-        # valida_cpf(args.cpf)
-        pass
+        valida_cpf(args.cpf)
 
     if option.cnpj is not None:
         valida_cnpj(args.cnpj)
+
+
+def valida_cpf(cpf):
+    cpf = cpf.replace('.', '').replace('-', '')
+
+    if len(cpf) == 10:
+        validar = True
+        digitos_verificadores = cpf[8:]
+    else:
+        validar = False
+
+    cpf = cpf[:9]
+
+    try:
+        dig_1 = int(cpf[0]) * 1
+        dig_2 = int(cpf[1]) * 2
+        dig_3 = int(cpf[2]) * 3
+        dig_4 = int(cpf[3]) * 4
+        dig_5 = int(cpf[4]) * 5
+        dig_6 = int(cpf[5]) * 6
+        dig_7 = int(cpf[6]) * 7
+        dig_8 = int(cpf[7]) * 8
+        dig_9 = int(cpf[8]) * 9
+    except IndexError:
+        print()
+        print('Quantidade de caracteres incorreto.', end='\n\n')
+        exit()
+
+    dig_1_ao_9_somados = (dig_1 + dig_2 + dig_3 + dig_4 + dig_5 + dig_6 + dig_7 + dig_8 + dig_9)
+
+    dig_10 = dig_1_ao_9_somados % 11
+
+    if dig_10 > 9:
+        dig_10 = 0
+
+    cpf += str(dig_10)
+
+    dig_1 = int(cpf[0]) * 0
+    dig_2 = int(cpf[1]) * 1
+    dig_3 = int(cpf[2]) * 2
+    dig_4 = int(cpf[3]) * 3
+    dig_5 = int(cpf[4]) * 4
+    dig_6 = int(cpf[5]) * 5
+    dig_7 = int(cpf[6]) * 6
+    dig_8 = int(cpf[7]) * 7
+    dig_9 = int(cpf[8]) * 8
+    dig_10 = int(cpf[9]) * 9
+
+    dig_1_ao_10_somados = (dig_1 + dig_2 + dig_3 + dig_4 + dig_5 + dig_6 + dig_7 + dig_8 + dig_9 + dig_10)
+
+    dig_11 = dig_1_ao_10_somados % 11
+
+    if dig_11 > 9:
+        dig_10 = 0
+
+    cpf_validado = cpf + str(dig_11)
+    print(cpf_validado)
 
 
 def valida_cnpj(cnpj):
