@@ -92,7 +92,7 @@ def valida_cnpj(cnpj):
 
     if len(cnpj) == 14:
         validar = True
-        digitos_verificadores = cnpj[13:]
+        digitos_verificadores = cnpj[12:]
     else:
         validar = False
 
@@ -154,7 +154,7 @@ def valida_cnpj(cnpj):
             cnpj_validado[5:8] + '/' + cnpj_validado[8:12] + '-' + cnpj_validado[12:])
 
     if validar:
-        if digitos_verificadores == cnpj_validado[13:]:
+        if digitos_verificadores == cnpj_validado[12:]:
             print()
             print('Os dígitos verificadores estão corretos.', end='\n\n')
         else:
